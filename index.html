@@ -1,35 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SDS 200 Scanner Dashboard</title>
+    <title>SDS200 Dashboard</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
+        body { background: #1a1a2e; color: #00ff00; font-family: Arial; padding: 20px; }
+        h1 { text-shadow: 0 0 10px #00ff00; }
         .stop-button {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: red;
+            background: red;
             color: white;
+            padding: 15px 30px;
             border: none;
-            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
             border-radius: 5px;
-            font-size: 16px;
+            z-index: 9999;
+            box-shadow: 0 0 15px red;
         }
+        .stop-button:hover { background: darkred; }
     </style>
 </head>
 <body>
-    <h1>Welcome to the SDS 200 Scanner Dashboard</h1>
-    <button class="stop-button">Stop</button>
-    <script>
-        document.querySelector('.stop-button').addEventListener('click', function() {
-            // Add functionality here for the stop button
-            alert('Stop button clicked!');
-        });
-    </script>
+    <h1>SDS200 Scanner Dashboard</h1>
+    <p>Dashboard running...</p>
+    <button class="stop-button" onclick="alert('Stop'); window.close();">STOP</button>
 </body>
 </html>
