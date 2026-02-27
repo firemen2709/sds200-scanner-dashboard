@@ -1,0 +1,13 @@
+# SDS200 Scanner Dashboard - Requirements
+# No external dependencies required!
+# Uses only Python 3 standard library modules:
+# - socket (network communication)
+# - json (data serialization)
+# - time (timing/delays)
+# - threading (background tasks)
+# - datetime (timestamps)
+# - pathlib (file operations)
+# - logging (error tracking)
+
+# Installation:
+# No pip install needed - just use Python 3.6+
