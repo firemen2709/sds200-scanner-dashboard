@@ -3,29 +3,98 @@
 <head>
     <title>SDS200 Dashboard</title>
     <style>
-        body { background: #1a1a2e; color: #00ff00; font-family: Arial; padding: 20px; }
-        h1 { text-shadow: 0 0 10px #00ff00; }
-        .stop-button {
+        body { 
+            background: #1a1a2e; 
+            color: #00ff00; 
+            font-family: Arial; 
+            padding: 20px; 
+        }
+        h1 { 
+            text-shadow: 0 0 10px #00ff00; 
+        }
+        .status {
+            margin: 20px 0;
+            padding: 15px;
+            border: 2px solid #00ff00;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .status.running {
+            border-color: green;
+            color: green;
+        }
+        .status.stopped {
+            border-color: red;
+            color: red;
+        }
+        .button-container {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: red;
-            color: white;
+            display: flex;
+            gap: 10px;
+            z-index: 9999;
+        }
+        .start-button, .stop-button {
             padding: 15px 30px;
             border: none;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
             border-radius: 5px;
-            z-index: 9999;
+            transition: all 0.3s;
+        }
+        .start-button {
+            background: green;
+            color: white;
+            box-shadow: 0 0 15px green;
+        }
+        .start-button:hover { 
+            background: darkgreen;
+            box-shadow: 0 0 25px green;
+        }
+        .stop-button {
+            background: red;
+            color: white;
             box-shadow: 0 0 15px red;
         }
-        .stop-button:hover { background: darkred; }
+        .stop-button:hover { 
+            background: darkred;
+            box-shadow: 0 0 25px red;
+        }
     </style>
 </head>
 <body>
     <h1>SDS200 Scanner Dashboard</h1>
-    <p>Dashboard running...</p>
-    <button class="stop-button" onclick="alert('Stop'); window.close();">STOP</button>
+    <div class="status stopped" id="status">Status: STOPPED</div>
+    
+    <div class="button-container">
+        <button class="start-button" onclick="startScanner()">START</button>
+        <button class="stop-button" onclick="stopScanner()">STOP</button>
+    </div>
+
+    <script>
+        function startScanner() {
+            fetch('/api/start', { method: 'POST' })
+                .then(r => r.json())
+                .then(d => {
+                    document.getElementById('status').textContent = 'Status: RUNNING';
+                    document.getElementById('status').className = 'status running';
+                    alert('Scanner started!');
+                })
+                .catch(e => alert('Error: ' + e));
+        }
+        function stopScanner() {
+            fetch('/api/stop', { method: 'POST' })
+                .then(r => r.json())
+                .then(d => {
+                    document.getElementById('status').textContent = 'Status: STOPPED';
+                    document.getElementById('status').className = 'status stopped';
+                    alert('Scanner stopped!');
+                })
+                .catch(e => alert('Error: ' + e));
+        }
+    </script>
 </body>
 </html>
